@@ -5,7 +5,8 @@ const path = require('path');
 const Quote = require('./models/quote');
 const methodOverride = require('method-override');
 
-mongoose.connect('mongodb://localhost:27017/quotes-db')
+// mongoose.connect('mongodb://localhost:27017/quotes-db')
+mongoose.connect(process.env.MONGO_URL)
 .then(()=>{
     console.log("DB Connected");
 })
@@ -52,7 +53,7 @@ app.delete('/quotes/:id', async (req, res)=>{
     res.redirect('/quotes')
 })
 
-
-app.listen('2323', ()=>{
+const port=process.env.PORT ||3000; 
+app.listen(port, ()=>{
     console.log('listening at 2323');
 })
